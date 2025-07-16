@@ -2,6 +2,8 @@
 
 If you are familiar with the situation of [Platform Material Digital](https://www.material-digital.de) or [NFDI Matwerk](https://nfdi-matwerk.de), you are certainly aware of the fact that there are a lot more failures than success stories. Here I would like to document  difficulties I encountered.
 
+Before we start, keep in mind: The keys to success are more or less the same as in other projects, these include: clear goals, effective planning, strong communication, and diligent monitoring. So I'm not gonna talk about these points in this document.
+
 ## Reason I: Too complex or too simple workflow
 
 This is by far the biggest problem, which is shared by most of the software tools. This is probably cause by the fact that for any workflow, the underlying model is so flexible that you can in principle solve so many problems that you cannot put the method into one single workflow frame. Some typical underlying models (obviously not exhaustive) are:
@@ -21,3 +23,5 @@ So basically in the one case the workflow is too rigid, and in the other case it
 ## Reason II: Excessive purism
 
 ## Reason III: "My case is special"
+
+## Reason IV: Too many unfulfilled promises
