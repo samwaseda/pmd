@@ -1,10 +1,8 @@
-# (Awareness) How to (not) write workflows - lessons I learned from DAMASK
+# (Awareness) How to (not) write workflows - lessons I learned from PMD
 
-StahlDigital was one of the in-house project of the MPIE in the framework of PMD, so naturally you would expect it to be the easiest one to accomplish and be successful. As you know today, that didn't materialize. Out of huge regret to not have supported the developers at that time, I looked into the project myself after StahlDigital was over, and today I would like to give my insight into the issue, in the hope that it helps you think about how to implement a workflow.
+In this file, I'm going to present my best knowledge of how to write workflows. The lessons I learned come from the workflow implementation activities at the project [Platform Material Digital](https://www.material-digital.de).
 
-Note: I'm not totally done with the implementation, so I might postpone my contribution to next week.
-
-First of all, you can take a look at [the notebook before I touched it](https://github.com/pyiron/pyiron_continuum/blob/2f28479e421386172a2edc9fce8df62e8551d836/notebooks/damask_tutorial.ipynb). Here's more or less how the workflow looked:
+First of all, you can take a look at a [typical notebook](https://github.com/pyiron/pyiron_continuum/blob/2f28479e421386172a2edc9fce8df62e8551d836/notebooks/damask_tutorial.ipynb) when you ask someone to write a workflow. Here's schematically more or less how the workflow looked:
 
 ```mermaid
 flowchart LR
@@ -138,9 +136,26 @@ ok it's a bit clumsy looking but the point is that it runs without esoteric `phe
 
 #### Option V: Give some default value
 
-(I take atomistic tools from here on, because I don't think you guys are extremely familiar with the model parameters of DAMASK)
-
 There are some relatively-easy-to-give default values, such as `timestep` in the MD calculations in LAMMPS. There are other parameters which are not easy to determine, such as temperature, which is a little bit tricky, because you might consider it as a fundamental parameter. `pyiron_atomistics` made an extremely dared step of setting `temperature = 300` as the default value for the MD calculations. This is a point where a lot of scientists criticized us for making nonsense workflows. However, while I admit there are few calculations that run indeed at 300 K, if you tell a scientist that pyiron has a default temperature for the MD, I'm sure that they can correctly guess that the value should be 300 K. So even though if we are giving some rare case value, it does not go beyond imagination of an average scientist. Another kind of default value is for example the maximum strain value of EV-curves. The results may depend on this value, but it is usually fine to use something like 5% or 10%.
+
+If you have the feeling that the choice of a default value is too audacious, you can try to warn the user if the default is indeed used. For example, you might want to give the sample size in the case of the stress strain curve, which let's say is `1e-5`. The obvious implementation would be:
+
+```python
+def get_box(box_size: float = 1.0e-5):
+    ...
+```
+
+but instead, you can also write:
+
+```python
+import warnings
+
+def get_box(box_size: float | None = None):
+    if box_size is None:
+        warnings.warn("'box_size' not provided; using default: 1e-5")
+        box_size = 1e-5
+    ...
+```
 
 #### Option VI: Create different workflows
 
@@ -189,5 +204,3 @@ Of course it's super important to give descriptive/explanatory error messages
 ## Lesson III: Use Macro to represent hierarchy
 
 ## Lesson IV: Do not create your own format
-
-I also wanted to talk about Lesson III and Lesson IV, but I realized that Lesson I got already so long, so I'm gonna leave it to another discussion some time later.
