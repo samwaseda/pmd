@@ -1,42 +1,47 @@
-# Most common failures in my digitalization projects
+# Most Common Failures in My Digitalization Projects
 
-If you are familiar with the situation of [Platform Material Digital](https://www.material-digital.de) or [NFDI Matwerk](https://nfdi-matwerk.de), you are certainly aware of the fact that there are a lot more failures than success stories. Here I would like to document  difficulties I encountered.
+If you are familiar with the situation of [Platform Material Digital](https://www.material-digital.de) or [NFDI MatWerk](https://nfdi-matwerk.de), you are certainly aware that there are far more failures than success stories. Here, I would like to document the difficulties I have encountered.
 
-Before we start, keep in mind: The keys to success are more or less the same as in other projects, these include: clear goals, effective planning, strong communication, and diligent monitoring. So I do not talk about these points in this document.
+Before we start, keep in mind: the keys to success are more or less the same as in other projects. These include clear goals, effective planning, strong communication, and diligent monitoring. Therefore, I will not discuss these points in this document.
 
-## Reason I: Too complex or too simple workflow
+## Reason I: Workflow Too Complex or Too Simple
 
-This is by far the biggest problem, which is shared by most of the software tools. This is caused by the fact that for any workflow, the underlying model is so flexible that you can in principle solve a lot more problems, so that you would think it does not make much sense to reduce it into a well-defined single-task workflow. Some typical underlying models (obviously not exhaustive) are:
+This is by far the most common problem, shared by many software tools. It stems from the fact that the underlying models of these workflows are often so flexible that they could, in principle, solve many different problems. As a result, it may seem illogical to reduce them to a well-defined, single-task workflow. Some typical underlying models (not an exhaustive list) include:
 
-- Schrödinger Equation
-- Newton's equation of motion
-- Poisson/diffusion equation
-- Ginzburg-Landau equation
+* Schrödinger equation
+* Newton's equations of motion
+* Poisson/diffusion equation
+* Ginzburg–Landau equation
 
-Now the problem is, many projects go into the following two opposite directions
+Now, the problem is that many projects go in one of two opposite directions:
 
-- Towards a workflow that was meant to be an example, and ended up being able to do only one thing
-- Towards a workflow that requires too many parameters/components for anyone to understand how to use it
+* Towards a workflow that was meant to be a simple example, but ends up being able to do only one thing
+* Towards a workflow that requires too many parameters or components for anyone to understand how to use it
 
-So basically in the one case the workflow is too rigid, and in the other case it's too flexible. Since this is a document to tell failures, I will not talk about the solutions in detail (maybe you can refer to [How to write workflows](how_to_write_workflows.md)), but here's a short summary of what you should do:
+So, in one case the workflow is too rigid, and in the other, it is too flexible. Since this is a document about failures, I won’t go into solutions in detail (you can refer to [How to Write Workflows](how_to_write_workflows.md)), but here’s a brief summary of what you should do:
 
-- Separate workflows according to scientific goals
-  - Create components that can be reused across different workflows
-- Make a clear hiearchy for the input and output data
-  - All parameters should be available, but the more technical and esoteric a parameter is, the depper in the hierarchy/more hidden it should be
+* Separate workflows according to scientific goals
+  * Create components that can be reused across different workflows
+* Make a clear hierarchy for input and output data
+  * All parameters should be available, but the more technical and esoteric a parameter is, the deeper it should be placed in the hierarchy (i.e., more hidden)
 
-## Reason II: Excessive purism
+## Reason II: Excessive Purism
 
-When Conda came around, their success was often questioned, because the tools would run more efficiently with a machine-specific compilation than with a standard compilation as offered by Conda. Today, I don't think anyone asks the same question. However, a similar thing basically still happens with our field, as very often experts refuse to give default input values or automatic setting of input values. Then you are left with a workflow tool which does nothing, because you cannot run it without an expert. If this happens, you can ask them this question: There are two coffee vending machines in front of you. One gives you coffee only if you set all the parameters (water temperature, grinding speed, granularity, water pressure, amount of coffee grounds, amount of water), and the other one gives you coffee without setting anything, but you can also change parameters if you want. Which one would you choose?
+When Conda was introduced, many questioned its success because tools could run more efficiently when compiled specifically for a machine, rather than with Conda's default compilation. Today, few would still raise that objection. Yet a similar kind of purism persists in our field: experts often refuse to provide default input values or automatic settings. The result is a workflow tool that can’t be used without expert knowledge.
 
-And finally, remember that there is always inherent uncertainty in any workflow. In experimental workflows, it's the input (uncertainty of the sample), and in simulation workflows, it's the output (uncertainty of the model). So while there are myriads of ways to make parameters reliable (cf. [this document](how_to_write_workflows.md)), we will always have to live with some uncertainty. But that did not hinder us from making progress in science, so I guess we are just as fine.
+If this happens, ask them this:
+There are two coffee vending machines in front of you. One gives you coffee only if you set all the parameters (water temperature, grinding speed, granularity, water pressure, amount of coffee grounds, amount of water). The other gives you coffee immediately, but allows you to change parameters if you wish. Which one would you choose?
 
-## Reason III: "My case is special"
+Finally, remember that any workflow inherently involves uncertainty. In experimental workflows, it's in the input (e.g., sample variability), while in simulations, it's in the output (model uncertainty). While there are many ways to make parameters more reliable (see [this document](how_to_write_workflows.md)), some uncertainty is unavoidable. But that has never stopped scientific progress — and it won’t now.
 
-When you try to explain how other cases were handled, you very often hear this argument: "Yes, in their case it's easy, but our case is complicated, because ...", and what follows is the kind of banal problems that everyone faces. You can try to explain them why they are wrong, but also be ready to give up on this case, because when this argument is used, it's usually a bad signal.
+## Reason III: “My Case Is Special”
 
-This being said, there are a few cases where the argument is at least partially valid. The most common one is human in the loop, e.g. a graphical interface, required human input (usually because the software is commercial and there's no way to change it), or experimental workflow nodes. The other one, which is extremely uncommon these days, is the run-time compilation, which basically makes it impossible to be interoperable.
+When you explain how other cases were handled, you often hear this: “Yes, in their case it's easy, but our case is complicated because...,” followed by problems that are, in fact, quite common. You can try to explain why they’re mistaken, but be prepared to give up — this argument is usually a red flag.
 
-## Reason IV: Too many unfulfilled promises
+That said, there are a few situations where the argument is at least partially valid. The most common is **human in the loop** cases, such as graphical interfaces, required human input (often due to commercial software constraints), or experimental workflow nodes. Another — now very rare — is **run-time compilation**, which effectively prevents interoperability.
 
-However honest you are, you are still in the workflow community, where people oversell their software solutions. As a consequence, people take promises very cautiously, however real they actually are. I have experienced it multiple times, as I claimed their software tool can be turned into a workflow, and nothing happened, but they came aboard when I show them a real demonstration. So don't think they lack trust; it's just the reality of the community that they cannot take you at your word. In this case, it might be worth making a live demonstration instead of keeping talking.
+## Reason IV: Too Many Unfulfilled Promises
+
+No matter how honest you are, you are part of the workflow community, where software tools are often oversold. As a result, people are cautious about promises — even if they are legitimate. I’ve experienced this multiple times: I claimed that someone’s tool could be integrated into a workflow, and no one responded. But when I showed a working demo, they came on board.
+
+So don’t assume they lack trust; it’s simply a consequence of the community's experience. In such cases, a live demonstration might be more effective than further discussion.
