@@ -1,4 +1,4 @@
-# (Awareness) How to (not) write workflows - lessons I learned from PMD
+# How to (not) write workflows - lessons I learned from PMD
 
 In this file, I'm going to present my best knowledge of how to write workflows. The lessons I learned come from the workflow implementation activities at the project [Platform Material Digital](https://www.material-digital.de).
 
